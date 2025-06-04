@@ -6,7 +6,7 @@ import ast
 import json
 from openai import OpenAI
 
-api_key = <API-KEY>
+api_key = os.getenv("OPENAI_API_KEY")
 base_model = 'gpt-4-turbo'
 
 # Prompt user for the number of records to process with validation
