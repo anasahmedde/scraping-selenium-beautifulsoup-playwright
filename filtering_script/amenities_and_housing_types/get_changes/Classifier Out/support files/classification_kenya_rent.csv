@@ -1,0 +1,163 @@
+Amenity,Price,Category
+2 Car Garage,4071.486666666666,Luxury
+24/7 Janitor,1332.2066666666667,Standard
+24/7 Security,2304.678888888889,Standard
+Accessible by Boat,2633.54,Standard
+Air Conditioning,1044.5485714285714,Basic
+Aircon,2910.6,Luxury
+Alarm System,1870.3575,Standard
+Attic,2093.91,Standard
+Back Porch,3025.2349999999997,Luxury
+Barbecue Pit,3530.193333333333,Luxury
+Basement,727.3166666666666,Basic
+Beach,581.64,Basic
+Brick,685.7225000000001,Basic
+Built-in-Cupboards,1575.0,Standard
+Bungalow,2472.1275,Standard
+CATV/cable,1078.008,Standard
+Car Washing Space Available,3325.5339999999997,Luxury
+Carport,5507.415,Luxury
+Category I Exclusive Low Building Residential Zone,5816.41,Luxury
+Ceramics,294.7133333333333,Basic
+City Center,1000.255,Basic
+Corner Plot,1497.7233333333334,Standard
+Counter Kitchen,2133.9975,Standard
+Country Property,4794.68,Luxury
+Country Side,2908.21,Luxury
+Downtown,727.17,Basic
+Eat-in Kitchen,3231.215,Luxury
+Edge of Forest,1405.63,Standard
+Electric Heating,4216.9,Luxury
+Electrical Generator,831.8585714285715,Basic
+Electricity,1436.532,Standard
+Electricity Included,60.0,Basic
+Energy Backup Unit,2742.5633333333335,Standard
+English,2000.0,Standard
+Ensuite,1575.0,Standard
+Entrance Hall,3190.09,Luxury
+Exterior Views,2863.2225,Luxury
+Fence,60.0,Basic
+First owner,1331.09,Standard
+Floors - Hardwood,4469.822,Luxury
+Furnished,1589.1622222222222,Standard
+Garage,2931.1525,Luxury
+Garages,60.0,Basic
+Gas,1435.9250000000002,Standard
+Gated Community,2098.25,Standard
+Gourmet Verandah,4750.0,Luxury
+Gymnasium,1689.0649999999998,Standard
+High Traffic,1524.264,Standard
+Highrise Condminium,536.4,Basic
+In-House Laundry Space ,4782.454,Luxury
+Individual Gas Meter,847.0150000000001,Basic
+Individual Water Meter,3162.6749999999997,Luxury
+Intercommunication Device with TV Monitor,1074.695,Standard
+Internet,60.0,Basic
+Isolated,807.03,Basic
+Italian Style,1218.115,Standard
+Jacuzzi,2684.5366666666664,Standard
+Janitor Available,720.2574999999999,Basic
+Kids Play Area,2448.6,Standard
+Kitchen  - Eat-In,1270.284,Standard
+Kitchen - Extra,2770.105,Standard
+Kitchen/Dinette,1011.6371428571429,Basic
+Laundry Service,1308.69,Standard
+Library,3222.1366666666668,Luxury
+Lift/ Elevator,300.0,Basic
+Lift/Elevator,1636.3840624999998,Standard
+Location,690.7,Basic
+Maid,5071.185,Luxury
+Maisonette Duplex,3271.73,Luxury
+More than 2 Balconies,2874.39,Luxury
+Multi Storey Car Park,763.6933333333333,Basic
+Multilevel House,4489.5425000000005,Luxury
+Near Airport,1067.425,Basic
+Near Beach,291.0,Basic
+Near Children,2370.186,Standard
+Near Church,2017.8116666666665,Standard
+Near Fitness centre,2070.6872727272726,Standard
+Near Golf Course,1708.744,Standard
+Near Highway,1150.79625,Standard
+Near Motorway,762.94375,Basic
+Near Ocean,581.64,Basic
+Near Park,2054.137142857143,Standard
+Near Public Transportation,1127.897,Standard
+Near Railway station,1260.2233333333334,Standard
+Near Schools,1755.942727272727,Standard
+Near Shops,2113.295,Standard
+Near/On Beach,723.42,Basic
+Near/On Ocean,723.42,Basic
+Needs to be redeveloped,5089.36,Luxury
+Networked,779.9399999999999,Basic
+New Building,1063.6087499999999,Basic
+No Pets Allowed,60.0,Basic
+No pets allowed,907.0,Basic
+Ocean View,2135.205,Standard
+Office Use permitted,3136.065,Luxury
+Old Building,4410.5,Luxury
+On Busy Road,1540.6000000000001,Standard
+On Quiet Road,2400.4162499999998,Standard
+On/Near Forest,2899.2675,Luxury
+On/Near Water,1545.29,Standard
+Open House Available,2610.115,Standard
+Outskirts,381.705,Basic
+Paintings,3654.3450000000003,Luxury
+Parking                  ,1513.482,Standard
+Parking Space for Bicycle,1194.7949999999998,Standard
+Parking Space for Motorcycle,1630.1116666666667,Standard
+Partially Furnished,3455.213333333333,Luxury
+Penthouse,2035.74,Standard
+Pet Friendly,2171.0,Standard
+Pet allowed,45.0,Basic
+Pets allowed,3869.218571428571,Luxury
+Play Room,1744.92,Standard
+Playground,4785.135,Luxury
+Pool,300.0,Basic
+Pool -  Indoor,1744.92,Standard
+Pool - Outdoor,897.3842857142857,Basic
+Private,2224.753333333333,Standard
+Ready to Sale,1090.8780000000002,Standard
+Ready to rent,1157.79,Standard
+Remote (distant),3267.08,Luxury
+Residential,3406.478,Luxury
+Restaurant Area,1601.848,Standard
+Roof Balcony,1684.0866666666668,Standard
+Roof Terrace,1386.4828571428573,Standard
+Sauna,1599.51,Standard
+Sea View,1917.3,Standard
+Secure Parking,1575.0,Standard
+Security -  System,1946.1719999999998,Standard
+Security - Surveillance,1457.398888888889,Standard
+Security Camera,1623.356,Standard
+Security System,1702.26,Standard
+Service Charge Included,2181.6666666666665,Standard
+Serviced,1203.1666666666667,Standard
+Showroom/Model Home Available,510.185,Basic
+Smoking allowed,5339.4225,Luxury
+Solar - Collectors,2142.475,Standard
+Solar - Heating,2050.35,Standard
+Solar Heating,3241.943333333333,Luxury
+Storage Room,3287.2333333333336,Luxury
+Swimming Pool,1496.05,Standard
+TCP/IP,1281.7533333333333,Standard
+Terrace/Deck,2084.935,Standard
+Texture,4358.45,Luxury
+Towncentre,0.4,Basic
+Underground Parking,2445.3025000000002,Standard
+Unfinished,1.45,Basic
+Unfurnished,1220.4875,Standard
+Victorian Style,2836.9966666666664,Luxury
+View - Great,2188.4739999999997,Standard
+View - Ocean,1995.25,Standard
+View - Open,2119.38,Standard
+Villa,6103.0675,Luxury
+Walk-In Closet,2322.3999999999996,Standard
+Walk-in-Closet,60.0,Basic
+Washing Facilities (in apartment),854.285,Basic
+Washing Facilities(in building),2863.525,Luxury
+Water,1786.122,Standard
+Water - Tank,4103.6775,Luxury
+Water Included,60.0,Basic
+Wheel Chair friendly,60.0,Basic
+Wheelchair Accessible,1725.5757142857142,Standard
+Wood,1276.45,Standard

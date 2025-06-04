@@ -1,0 +1,89 @@
+Amenity,Price,Category
+***Floor to ceiling window***,9.0,Basic
+24/7 Security,1318.1666666666667,Standard
+ADSL,1300.0,Standard
+Air Conditioning,1176.125,Standard
+Alarm System,1063.0,Basic
+Automatic Door,1550.0,Standard
+Balcony,1030.0,Basic
+Brick,821.8,Basic
+Building Age less than 1 year,1566.6666666666667,Standard
+Building Age less than 10 year,1800.0,Standard
+Building Age less than 3 year,1333.3333333333333,Standard
+Building Age less than 5 year,700.0,Basic
+Bungalow,3000.0,Luxury
+Catchment Area for School,3328.75,Luxury
+Ceiling Fan,1420.0,Standard
+Central Air,9.0,Basic
+City Center,1777.25,Standard
+Condominium Apartment,1500.0,Standard
+Eat-in Kitchen,2825.0,Luxury
+Electric Heating,1833.3333333333333,Standard
+Electric Vehicle Charge Station,1800.0,Standard
+Entrance Hall,937.3333333333334,Basic
+Exterior Views,1075.0,Basic
+Freight Elevator,2300.0,Luxury
+Furnished,1328.5714285714287,Standard
+Garage,1163.0,Standard
+Garden,2520.0,Luxury
+Gas,2480.0,Luxury
+Gymnasium,1800.0,Standard
+High Ceiling,1833.3333333333333,Standard
+Hight Speed Internet Access (Optical Fiber),604.0,Basic
+Kitchen/Dinette,2000.0,Standard
+Lift/Elevator,1003.0,Basic
+Location,3722.4,Luxury
+Maid,1800.0,Standard
+Modern,600.0,Basic
+Modern House,3500.0,Luxury
+Mountains,1800.0,Standard
+Multilevel House,1125.0,Standard
+Near Airport,1227.25,Standard
+Near Beach,1328.5714285714287,Standard
+Near Church,1400.0,Standard
+Near Motorway,2722.4,Luxury
+Near Public Transportation,2650.0,Luxury
+Near Schools,2212.777777777778,Standard
+Near Shops,2366.6666666666665,Luxury
+Near/On Beach,1400.0,Standard
+Near/On Ocean,600.0,Basic
+Needs Renovation,1104.5,Standard
+Needs to be redeveloped,3936.3333333333335,Luxury
+New Building,1640.0,Standard
+No pets allowed,2300.0,Luxury
+Ocean View,1025.0,Basic
+On Busy Road,3961.8,Luxury
+Outdoor kitchen,600.0,Basic
+Parking                  ,1715.5714285714287,Standard
+Partially Furnished,869.6666666666666,Basic
+Pool - Outdoor,3140.0,Luxury
+Private,1833.3333333333333,Standard
+Ready to rent,740.0,Basic
+Residential,2925.0,Luxury
+Restaurant Area,1050.0,Basic
+Roof Terrace,1533.3333333333333,Standard
+Satellite,1800.0,Standard
+Sea View,1275.0,Standard
+Security -  System,1378.0,Standard
+Security - Surveillance,1378.75,Standard
+Security Camera,1003.75,Basic
+Shed,1800.0,Standard
+Shed Detached,1600.0,Standard
+Sports Gym,1800.0,Standard
+Stainless Steel Appliances,1300.0,Standard
+Swimming Pool,3114.285714285714,Luxury
+Terrace/Deck,1100.0,Basic
+To Be Renovated,1104.5,Standard
+Unfinished,2400.0,Luxury
+Unfinished Structure,2200.0,Standard
+View - Mountain,1050.0,Basic
+View - Ocean,1400.0,Standard
+View - Open,4360.0,Luxury
+Villa,1425.0,Standard
+Walk-In Closet,4300.0,Luxury
+Washing Facilities (in apartment),1433.3333333333333,Standard
+Water,1061.8,Basic
+Water - Tank,2520.0,Luxury
+Water Purification System,2000.0,Standard
+Wheelchair Accessible,1002.25,Basic
+With Ownership Right,4401.8,Luxury

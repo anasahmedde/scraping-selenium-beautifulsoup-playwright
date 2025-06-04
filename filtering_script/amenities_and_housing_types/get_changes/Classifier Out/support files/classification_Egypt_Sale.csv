@@ -1,0 +1,191 @@
+Amenity,Price,Category
+24/7 Janitor,173987.19375,Basic
+24/7 Security,606943.6546153846,Luxury
+ADSL,121016.59749999999,Basic
+Above 2nd Floor Level,282465.345,Standard
+Accessible by Boat,0.0,Basic
+Air Conditioning,306880.2130769231,Standard
+Alarm System,233576.4509090909,Standard
+Alone location,92405.254,Basic
+Art Deco ,676516.3300000001,Luxury
+Attic,72211.225,Basic
+Automatic Door,408071.294,Luxury
+Back Porch,114868.18,Basic
+Balcony,220984.02333333335,Standard
+Barbecue Pit,252564.87,Standard
+Basement,206314.18333333335,Standard
+Bay Window,202497.03,Standard
+Beach,493845.4644444444,Luxury
+Brick,209756.41999999998,Standard
+Building Age less than 1 year,243533.85888888888,Standard
+Building Age less than 10 year,202614.9757142857,Standard
+Building Age less than 20 year,206953.19,Standard
+Building Age less than 3 year,176237.256,Basic
+Building Age less than 5 year,272231.0925,Standard
+Built-in Kitchen,260900.71125,Standard
+CATV/cable,307970.94,Standard
+Car Washing Space Available,257867.33600000004,Standard
+Carpet,362792.37,Standard
+Carport,142648.41999999998,Basic
+Central Air,266652.836,Standard
+Central Heating,193609.81,Standard
+Century Home,202497.03,Standard
+Ceramics,178274.24,Standard
+Cesspit,158815.86,Basic
+Chamber en Suite,418615.80500000005,Luxury
+City Center,159806.58363636362,Basic
+Clothes Washer/Dryer,0.0,Basic
+Concierge Service,531453.0022222223,Luxury
+Concrete,256402.185,Standard
+Corner Plot,58606.21,Basic
+Corner Suite,370161.03,Luxury
+Country Property,307682.62,Standard
+Deck,366288.83,Standard
+Disposer Drainage,98545.65000000001,Basic
+Dock,159074.01,Basic
+Downtown,523793.0308333333,Luxury
+East,134614.88428571427,Basic
+Eat-in Kitchen,278703.6257142857,Standard
+Electrical Generator,315793.3,Standard
+Electricity,165874.41999999998,Basic
+Energy Backup Unit,295333.45,Standard
+Entrance Hall,259026.15571428573,Standard
+Exterior Views,236190.4342857143,Standard
+First owner,485622.8790909091,Luxury
+Flat Roof,191429.5183333333,Standard
+Floor - Parquet,252026.602,Standard
+Floors - Hardwood,260338.82166666666,Standard
+Freight Elevator,271610.494,Standard
+French,29303.11,Basic
+Fronting on Lagoon,518942.6175,Luxury
+Furnished,473932.8964285715,Luxury
+Garage,256935.918,Standard
+Garage Detached,250743.89,Standard
+Garage with Automatic Door,226722.32,Standard
+Garbage-in 24/7,340436.08375,Standard
+Garden,264833.32666666666,Standard
+Gas - Natural,465698.0123076923,Luxury
+Glass Siding,72560.07333333332,Basic
+Good reachable traffic,278925.28,Standard
+Heating,0.0,Basic
+High Ceiling,107270.3,Basic
+High Traffic,652575.4292307693,Luxury
+In-House Laundry Space ,251931.364,Standard
+Individual Gas Meter,86699.52,Basic
+Individual Water Meter,471849.78533333336,Luxury
+Italian,158686.78999999998,Basic
+Jacuzzi,207214.825,Standard
+Kitchen  - Eat-In,265844.8488888889,Standard
+Laundry Service,278622.96,Standard
+Library,391405.78,Luxury
+Lift/Elevator,157292.3218181818,Basic
+Location,692508.7246153846,Luxury
+Loft,243744.81,Standard
+Maid,534991.1742857143,Luxury
+Metal,317729.396,Standard
+Modern,223999.49700000003,Standard
+More than 2 Balconies,352380.532,Standard
+Mosaic,0.0,Basic
+Multi Sports court,268699.02,Standard
+Multi Storey Car Park,157138.2,Basic
+Multilevel House,34535.8,Basic
+Natural Gas,420123.175,Luxury
+Near Airport,259359.3790909091,Standard
+Near Beach,394758.1958333333,Luxury
+Near Children,250503.50454545452,Standard
+Near Church,447471.75818181824,Luxury
+Near Fitness centre,488079.86833333335,Luxury
+Near Golf Course,258767.36000000002,Standard
+Near Highway,293972.0275,Standard
+Near Park,230551.13833333334,Standard
+Near Public Transportation,709897.3815384617,Luxury
+Near Railway station,220969.90222222224,Standard
+Near Schools,492196.2575,Luxury
+Near Shops,455126.31000000006,Luxury
+Near/On Beach,380463.9091666667,Luxury
+Near/On Sea,430108.38636363635,Luxury
+New Building,252303.23583333334,Standard
+No pets allowed,418615.81,Luxury
+North,244006.50333333336,Standard
+North East,293031.07,Standard
+NorthWest,163783.435,Basic
+Office Use permitted,625830.63,Luxury
+Old Building,549745.0916666667,Luxury
+On Busy Road,201545.86999999997,Standard
+On Quiet Road,362530.80363636365,Standard
+On/Near Lake,211680.0588888889,Standard
+On/Near Water,135254.315,Basic
+Open House Available,441732.59400000004,Luxury
+Paint,235401.88818181818,Standard
+Paintings,330193.5957142857,Standard
+Panel,29303.11,Basic
+Parking                  ,340798.1192857143,Standard
+Parking Space for Bicycle,226127.805,Standard
+Parking Space for Motorcycle,177811.3825,Basic
+Parquet floor,405203.346,Luxury
+Partially Furnished,141282.835,Basic
+Permit Parking,313961.86,Standard
+Pets allowed,177126.814,Basic
+Play Room,325124.94333333336,Standard
+Playground,226846.33285714287,Standard
+Playing Musical Instruments allowed,177911.72,Basic
+Pond,523269.76,Luxury
+Pool -  Indoor,256576.60499999998,Standard
+Pool - Outdoor,222611.08555555556,Standard
+Prefabricated,77967.195,Basic
+Private,177911.71714285715,Basic
+Property Registry,445428.5318181818,Luxury
+Property Video Available,163699.71142857143,Basic
+Protected (Historical),119305.505,Basic
+Ready to Sale,413519.96538461547,Luxury
+Ready to rent,324167.11,Standard
+Redeveloped,160071.88,Basic
+Restaurant Area,233576.4509090909,Standard
+Roman,455635.0525,Luxury
+Roof Balcony,310647.8133333333,Standard
+Roof Terrace,268542.04,Standard
+Satellite,217470.91,Standard
+Sauna,183144.415,Standard
+Sea View,167609.582,Basic
+Security -  System,465281.2316666667,Luxury
+Security - Alarm,471386.04583333334,Luxury
+Security - Surveillance,198991.67363636364,Standard
+Security Camera,208973.011,Standard
+Security System,432090.00500000006,Luxury
+Separate Bath & Restroom,475338.45,Luxury
+Settlement,229227.03666666665,Standard
+Shed,104653.95,Basic
+Shed Detached,732577.66,Luxury
+Showroom/Model Home Available,397580.365,Luxury
+Siding,108840.10999999999,Basic
+Skylight,94188.555,Basic
+Smoking allowed,252435.79699999996,Standard
+Solar - Collectors,150701.69,Basic
+South,177911.72,Basic
+South West,648854.5,Luxury
+Sports Gym,205866.416,Standard
+Stable,413383.11,Luxury
+Storage Room,327720.36333333334,Standard
+Stucco,518037.06499999994,Luxury
+Swimming Pool,254282.94,Standard
+Terrace/Deck,144021.07454545455,Basic
+Texture,334608.695,Standard
+To Be Renovated,453182.085,Luxury
+Toilet Seat with Bidet Functions,0.0,Basic
+Transferred Business with its Furnishings,36628.885,Basic
+Underground Parking,239892.1942857143,Standard
+Unfinished,283424.9166666667,Standard
+Unfinished Structure,287798.37,Standard
+Unfurnished,238805.3671428571,Standard
+View - Lake,249762.26499999998,Standard
+View - Mountain,99421.255,Basic
+View - Open,455025.31083333335,Luxury
+Villa,282565.67,Standard
+Walk-In Closet,358335.132,Standard
+Washing Facilities (in apartment),188028.26333333334,Standard
+Water - Tank,563857.5542857143,Luxury
+West,106935.40800000001,Basic
+Wheelchair Accessible,256402.18285714285,Standard
+Whirlpool Spa,366288.83,Standard
+With Ownership Right,239688.46099999998,Standard
+Wood,250269.26333333334,Standard

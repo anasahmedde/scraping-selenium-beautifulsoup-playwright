@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  log-tailer:
+    image: alpine:latest
+    command: /bin/sh -c "tail -f /mnt/logs/python.log"
+    volumes:
+      - /home/ec2-user/python_logs:/mnt/logs
+    restart: unless-stopped
+
+  dozzle:
+    image: amir20/dozzle:latest
+    container_name: dozzle
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    ports:
+      - "8888:8080"
+    restart: unless-stopped

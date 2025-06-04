@@ -1,0 +1,644 @@
+variables:
+  IMAGE_NAME: "561513845508.dkr.ecr.us-east-2.amazonaws.com/scraping-scripts:latest"
+  INSTANCE_TAG_VALUE: "rehani-scraping-runner"
+  GUI_INSTANCE_TAG_VALUE: "gui-scraping-runner"
+  SLACK_WEBHOOK_URL: "SLACK_URI"
+
+stages:
+  - build-to-ecr
+  - deploy
+  - terminate
+  - manual-run
+  - execute
+
+#############################################################
+# BUILD & DEPLOY JOBS (unchanged)
+#############################################################
+
+build_image:
+  stage: build-to-ecr
+  services:
+    - docker:19.03.12-dind
+  before_script:
+    - apk add --no-cache docker-cli aws-cli
+  script:
+    - docker image prune -af || true
+    - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 561513845508.dkr.ecr.us-east-2.amazonaws.com
+    - echo "$ENV_PROD" > .env
+    - docker build -t scraping-scripts .
+    - docker tag scraping-scripts:latest $IMAGE_NAME
+    - docker push $IMAGE_NAME
+  tags:
+    - global-runner
+  only:
+    - main
+  when: manual
+
+deploy_to_staging:
+  stage: deploy
+  script:
+    - sudo -u ubuntu sh -c 'cd /home/ubuntu/rehani-scraping-scripts/cronjob && git fetch origin && git reset --hard origin/main'
+    - sudo -u ubuntu sh -c "docker rmi -f $IMAGE_NAME && aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 561513845508.dkr.ecr.us-east-2.amazonaws.com && docker pull $IMAGE_NAME"
+  tags:
+    - global-runner
+  only:
+    - main
+  when: manual
+
+#############################################################
+# TERMINATION TEMPLATES & JOBS (Dynamic buttons)
+#############################################################
+
+.terminate_template: &terminate_template
+  stage: terminate
+  services:
+    - docker:19.03.12-dind
+  before_script:
+    - apk add --no-cache docker-cli aws-cli curl
+  script: |
+    aws sns publish --topic-arn "${SNS_TERMINATION_TOPIC}" --message '{"action":"terminate"}' --region "us-east-2"
+    slack_message="${TERMINATION_MESSAGE}"
+    curl -X POST --data-urlencode "payload={\"text\": \"$slack_message\"}" $SLACK_WEBHOOK_URL
+  tags:
+    - global-runner
+  only:
+    - main
+  when: manual
+
+terminate_NON_GUI_runner:
+  extends: .terminate_template
+  variables:
+    SNS_TERMINATION_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+    TERMINATION_MESSAGE: "NON-GUI Instance Terminated Manually"
+
+terminate_GUI_runner:
+  extends: .terminate_template
+  variables:
+    SNS_TERMINATION_TOPIC: "arn:aws:sns:us-east-2:561513845508:gui-scrapper-runner-sns"
+    TERMINATION_MESSAGE: "GUI Instance Terminated Manually"
+
+#############################################################
+# TEMPLATES FOR MANUAL-RUN (INSTANCE CHECK) & EXECUTORS
+#############################################################
+
+# This template is used for every manual-run job.
+.default_manual_run: &default_manual_run
+  stage: manual-run
+  services:
+    - docker:19.03.12-dind
+  before_script:
+    - apk add --no-cache docker-cli aws-cli curl
+  script: |
+    # Check for any running instances for the given tag
+    instance_info=$(aws ec2 describe-instances --region us-east-2 --filters "Name=tag:Name,Values=${SCRAPER_TAG}" "Name=instance-state-name,Values=running" --query "Reservations[*].Instances[*].[State.Name, PublicIpAddress]" --output text)
+    if echo "$instance_info" | grep "running"; then
+      public_ips=$(echo "$instance_info" | awk '{print $2}')
+      echo "Running instance(s) found with the public IP address(es): $public_ips"
+      echo "Dozzle URL: http://$public_ips:8888"
+      echo "PIPELINE FAILED: Another process is already Running please check the above Dozzle URL"
+      exit 1
+    else
+      echo "No running instance found with the tag ${SCRAPER_TAG}. Proceeding..."
+      aws sns publish --topic-arn "${SNS_TOPIC}" --message '{"action":"create"}' --region "us-east-2"
+      sleep 10
+      instance_info=$(aws ec2 describe-instances --region us-east-2 --filters "Name=tag:Name,Values=${SCRAPER_TAG}" "Name=instance-state-name,Values=running" --query "Reservations[*].Instances[*].[State.Name, PublicIpAddress]" --output text)
+      public_ips=$(echo "$instance_info" | awk '{print $2}')
+      echo "Running instance(s) found with the public IP address(es): $public_ips"
+      echo "Dozzle URL: http://$public_ips:8888"
+      dozzle_url="http://$public_ips:8888"
+      slack_message="Dozzle URL: $dozzle_url"
+      curl -X POST --data-urlencode "payload={\"text\": \"$slack_message\"}" $SLACK_WEBHOOK_URL
+    fi
+  tags:
+    - global-runner
+  only:
+    - main
+  when: manual
+
+# Executor template for GUI-based scrapers.
+.gui_executor_template: &gui_executor_template
+  stage: execute
+  script: |
+    sudo -u ec2-user sh -c "cd /home/ec2-user/rehani-scraping-scripts && git fetch origin && git reset --hard origin/main && /usr/local/bin/pip3.12 install -r requirements.txt"
+    sudo -u ec2-user sh -c '/usr/bin/echo "" > /home/ec2-user/python_logs/python.log'
+    sudo chmod +x /home/ec2-user/rehani-scraping-scripts/cronjob/gui-cronjob.sh
+    sudo -u ec2-user sh -c "nohup /home/ec2-user/rehani-scraping-scripts/cronjob/gui-cronjob.sh ${SCRAPER_NAME} > /home/ec2-user/gui-cronjob.log 2>&1 &" || true
+  tags:
+    - gui-scraping-runner
+  only:
+    - main
+
+# Executor template for non-GUI scrapers.
+.non_gui_executor_template: &non_gui_executor_template
+  stage: execute
+  script: |
+    sudo -u ubuntu sh -c "docker rmi -f $IMAGE_NAME && aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 561513845508.dkr.ecr.us-east-2.amazonaws.com && docker pull $IMAGE_NAME"
+    sudo -u ubuntu sh -c 'cd /home/ubuntu/rehani-scraping-scripts && git fetch origin && git reset --hard origin/main && pip install -r requirements.txt'
+    sudo -u ubuntu sh -c "nohup /usr/bin/python3 /home/ubuntu/rehani-scraping-scripts/cronjob/docker-cronjob.py --folders ${SCRAPER_NAME} > /tmp/${SCRAPER_NAME}.log 2>&1 &"
+    sudo -u ubuntu sh -c "cd /home/ubuntu && docker compose up -d"
+  tags:
+    - scrapper-runner-shell
+  only:
+    - main
+
+#############################################################
+# JOBS FOR GUI SCRAPERS (e.g. airbnb, booking)
+#############################################################
+
+airbnb:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "airbnb"
+    SCRAPER_TAG: "$GUI_INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:gui-scrapper-runner-sns"
+
+airbnb_executor:
+  extends: .gui_executor_template
+  variables:
+    SCRAPER_NAME: "airbnb"
+  needs: ["airbnb"]
+  when: on_success
+
+booking:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "booking"
+    SCRAPER_TAG: "$GUI_INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:gui-scrapper-runner-sns"
+
+booking_executor:
+  extends: .gui_executor_template
+  variables:
+    SCRAPER_NAME: "booking"
+  needs: ["booking"]
+  when: on_success
+
+#############################################################
+# JOBS FOR NON-GUI SCRAPERS
+#############################################################
+
+global_remax:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "global_remax"
+    SCRAPER_TAG: "$INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+
+global_remax_executor:
+  extends: .non_gui_executor_template
+  variables:
+    SCRAPER_NAME: "global_remax"
+  needs: ["global_remax"]
+  when: on_success
+
+buyrentkenya:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "buyrentkenya"
+    SCRAPER_TAG: "$INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+
+buyrentkenya_executor:
+  extends: .non_gui_executor_template
+  variables:
+    SCRAPER_NAME: "buyrentkenya"
+  needs: ["buyrentkenya"]
+  when: on_success
+
+jiji_co_ke:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "jiji_co_ke"
+    SCRAPER_TAG: "$INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+
+jiji_co_ke_executor:
+  extends: .non_gui_executor_template
+  variables:
+    SCRAPER_NAME: "jiji_co_ke"
+  needs: ["jiji_co_ke"]
+  when: on_success
+
+jiji_ug:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "jiji_ug"
+    SCRAPER_TAG: "$INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+
+jiji_ug_executor:
+  extends: .non_gui_executor_template
+  variables:
+    SCRAPER_NAME: "jiji_ug"
+  needs: ["jiji_ug"]
+  when: on_success
+
+jiji_co_tz:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "jiji_co_tz"
+    SCRAPER_TAG: "$INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+
+jiji_co_tz_executor:
+  extends: .non_gui_executor_template
+  variables:
+    SCRAPER_NAME: "jiji_co_tz"
+  needs: ["jiji_co_tz"]
+  when: on_success
+
+jiji_com_gh:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "jiji_com_gh"
+    SCRAPER_TAG: "$INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+
+jiji_com_gh_executor:
+  extends: .non_gui_executor_template
+  variables:
+    SCRAPER_NAME: "jiji_com_gh"
+  needs: ["jiji_com_gh"]
+  when: on_success
+
+jiji_ng:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "jiji_ng"
+    SCRAPER_TAG: "$INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+
+jiji_ng_executor:
+  extends: .non_gui_executor_template
+  variables:
+    SCRAPER_NAME: "jiji_ng"
+  needs: ["jiji_ng"]
+  when: on_success
+
+jiji_com_et:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "jiji_com_et"
+    SCRAPER_TAG: "$INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+
+jiji_com_et_executor:
+  extends: .non_gui_executor_template
+  variables:
+    SCRAPER_NAME: "jiji_com_et"
+  needs: ["jiji_com_et"]
+  when: on_success
+
+ethiopian_properties:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "ethiopian_properties"
+    SCRAPER_TAG: "$INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+
+ethiopian_properties_executor:
+  extends: .non_gui_executor_template
+  variables:
+    SCRAPER_NAME: "ethiopian_properties"
+  needs: ["ethiopian_properties"]
+  when: on_success
+
+ghana_property_center:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "ghana_property_center"
+    SCRAPER_TAG: "$INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+
+ghana_property_center_executor:
+  extends: .non_gui_executor_template
+  variables:
+    SCRAPER_NAME: "ghana_property_center"
+  needs: ["ghana_property_center"]
+  when: on_success
+
+house_in_rwanda:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "house_in_rwanda"
+    SCRAPER_TAG: "$INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+
+house_in_rwanda_executor:
+  extends: .non_gui_executor_template
+  variables:
+    SCRAPER_NAME: "house_in_rwanda"
+  needs: ["house_in_rwanda"]
+  when: on_success
+
+kenya_property_center:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "kenya_property_center"
+    SCRAPER_TAG: "$INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+
+kenya_property_center_executor:
+  extends: .non_gui_executor_template
+  variables:
+    SCRAPER_NAME: "kenya_property_center"
+  needs: ["kenya_property_center"]
+  when: on_success
+
+lamudi:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "lamudi"
+    SCRAPER_TAG: "$INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+
+lamudi_executor:
+  extends: .non_gui_executor_template
+  variables:
+    SCRAPER_NAME: "lamudi"
+  needs: ["lamudi"]
+  when: on_success
+
+mubawab:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "mubawab"
+    SCRAPER_TAG: "$INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+
+mubawab_executor:
+  extends: .non_gui_executor_template
+  variables:
+    SCRAPER_NAME: "mubawab"
+  needs: ["mubawab"]
+  when: on_success
+
+nigeria_property_center:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "nigeria_property_center"
+    SCRAPER_TAG: "$INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+
+nigeria_property_center_executor:
+  extends: .non_gui_executor_template
+  variables:
+    SCRAPER_NAME: "nigeria_property_center"
+  needs: ["nigeria_property_center"]
+  when: on_success
+
+property24:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "property24"
+    SCRAPER_TAG: "$INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+
+property24_executor:
+  extends: .non_gui_executor_template
+  variables:
+    SCRAPER_NAME: "property24"
+  needs: ["property24"]
+  when: on_success
+
+property24_co_ke:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "property24_co_ke"
+    SCRAPER_TAG: "$INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+
+property24_co_ke_executor:
+  extends: .non_gui_executor_template
+  variables:
+    SCRAPER_NAME: "property24_co_ke"
+  needs: ["property24_co_ke"]
+  when: on_success
+
+propertypro_co_ke:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "propertypro_co_ke"
+    SCRAPER_TAG: "$INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+
+propertypro_co_ke_executor:
+  extends: .non_gui_executor_template
+  variables:
+    SCRAPER_NAME: "propertypro_co_ke"
+  needs: ["propertypro_co_ke"]
+  when: on_success
+
+propertypro_co_ug:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "propertypro_co_ug"
+    SCRAPER_TAG: "$INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+
+propertypro_co_ug_executor:
+  extends: .non_gui_executor_template
+  variables:
+    SCRAPER_NAME: "propertypro_co_ug"
+  needs: ["propertypro_co_ug"]
+  when: on_success
+
+propertypro_co_zw:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "propertypro_co_zw"
+    SCRAPER_TAG: "$INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+
+propertypro_co_zw_executor:
+  extends: .non_gui_executor_template
+  variables:
+    SCRAPER_NAME: "propertypro_co_zw"
+  needs: ["propertypro_co_zw"]
+  when: on_success
+
+propertypro_ng:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "propertypro_ng"
+    SCRAPER_TAG: "$INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+  
+propertypro_ng_executor:
+  extends: .non_gui_executor_template
+  variables:
+    SCRAPER_NAME: "propertypro_ng"
+  needs: ["propertypro_ng"]
+  when: on_success
+
+prophuntgh:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "prophuntgh"
+    SCRAPER_TAG: "$INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+
+prophuntgh_executor:
+  extends: .non_gui_executor_template
+  variables:
+    SCRAPER_NAME: "prophuntgh"
+  needs: ["prophuntgh"]
+  when: on_success
+
+real_estate_tanzania:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "real_estate_tanzania"
+    SCRAPER_TAG: "$INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+
+real_estate_tanzania_executor:
+  extends: .non_gui_executor_template
+  variables:
+    SCRAPER_NAME: "real_estate_tanzania"
+  needs: ["real_estate_tanzania"]
+  when: on_success
+
+seso:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "seso"
+    SCRAPER_TAG: "$INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+
+seso_executor:
+  extends: .non_gui_executor_template
+  variables:
+    SCRAPER_NAME: "seso"
+  needs: ["seso"]
+  when: on_success
+
+knightfrank_ug:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "knightfrank_ug"
+    SCRAPER_TAG: "$INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+
+knightfrank_ug_executor:
+  extends: .non_gui_executor_template
+  variables:
+    SCRAPER_NAME: "knightfrank_ug"
+  needs: ["knightfrank_ug"]
+  when: on_success
+
+all_scrap:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "all_scrap"
+    SCRAPER_TAG: "$INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+
+all_scrap_executor:
+  extends: .non_gui_executor_template
+  variables:
+    SCRAPER_NAME: "all_scrap"
+  needs: ["all_scrap"]
+  when: on_success
+
+
+##############################################################################
+############################## Filtration Script #############################
+##############################################################################
+
+# Executor template for non-GUI scrapers.
+.non_gui_filtration_executor_template: &non_gui_filtration_executor_template
+  stage: execute
+  script: |
+    sudo -u ubuntu sh -c "docker rmi -f $IMAGE_NAME && aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 561513845508.dkr.ecr.us-east-2.amazonaws.com && docker pull $IMAGE_NAME"
+    sudo -u ubuntu sh -c 'cd /home/ubuntu/rehani-scraping-scripts && git fetch origin && git reset --hard origin/main && pip install -r requirements.txt'
+    sudo -u ubuntu sh -c "nohup /usr/bin/python3 /home/ubuntu/rehani-scraping-scripts/cronjob/${DOCKER_CRONJOB_FILTRATION_FILE_NAME} --folders ${SCRAPER_NAME} > /tmp/${SCRAPER_NAME}.log 2>&1 &"
+    sudo -u ubuntu sh -c "cd /home/ubuntu && docker compose up -d"
+  tags:
+    - scrapper-runner-shell
+  only:
+    - main
+
+filtration:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "filtering_script"
+    SCRAPER_TAG: "$INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+
+filtration_executor:
+  extends: .non_gui_filtration_executor_template
+  variables:
+    SCRAPER_NAME: "filtering_script"
+    DOCKER_CRONJOB_FILTRATION_FILE_NAME: "docker-cronjob-filtration.py"
+  needs: ["filtration"]
+  when: on_success
+
+########## Filteration Iteration 1 ############
+
+filtration_iteration_1:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "filtering_script"
+    SCRAPER_TAG: "$INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+
+filtration_iteration_1_executor:
+  extends: .non_gui_filtration_executor_template
+  variables:
+    SCRAPER_NAME: "filtering_script"
+    DOCKER_CRONJOB_FILTRATION_FILE_NAME: "docker-cronjob-filtration-iteration-1.py"
+  needs: ["filtration_iteration_1"]
+  when: on_success
+
+
+########## Filteration Iteration 2 ############
+
+filtration_iteration_2:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "filtering_script"
+    SCRAPER_TAG: "$INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+
+filtration_iteration_2_executor:
+  extends: .non_gui_filtration_executor_template
+  variables:
+    SCRAPER_NAME: "filtering_script"
+    DOCKER_CRONJOB_FILTRATION_FILE_NAME: "docker-cronjob-filtration-iteration-2.py"
+  needs: ["filtration_iteration_2"]
+  when: on_success
+
+########## Filteration Iteration 3 ############
+
+filtration_iteration_3:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "filtering_script"
+    SCRAPER_TAG: "$INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+
+filtration_iteration_3_executor:
+  extends: .non_gui_filtration_executor_template
+  variables:
+    SCRAPER_NAME: "filtering_script"
+    DOCKER_CRONJOB_FILTRATION_FILE_NAME: "docker-cronjob-filtration-iteration-3.py"
+  needs: ["filtration_iteration_3"]
+  when: on_success
+
+########## Filteration Iteration 4 ############
+
+filtration_iteration_4:
+  extends: .default_manual_run
+  variables:
+    SCRAPER_NAME: "filtering_script"
+    SCRAPER_TAG: "$INSTANCE_TAG_VALUE"
+    SNS_TOPIC: "arn:aws:sns:us-east-2:561513845508:rehani-scraping-sns"
+
+filtration_iteration_4_executor:
+  extends: .non_gui_filtration_executor_template
+  variables:
+    SCRAPER_NAME: "filtering_script"
+    DOCKER_CRONJOB_FILTRATION_FILE_NAME: "docker-cronjob-filtration-iteration-4.py"
+  needs: ["filtration_iteration_4"]
+  when: on_success

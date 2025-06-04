@@ -1,0 +1,206 @@
+Amenity,Price,Category
+,9.68888888888889e-05,Standard
+1 room,0.000147,Luxury
+100 m²,5.7e-05,Basic
+1000 m²,2e-05,Basic
+1001 feet²,2.6e-05,Basic
+1012 feet²,0.00019,Luxury
+1023 feet²,6.8e-05,Basic
+1076 feet²,6.8e-05,Basic
+107640 feet²,7e-05,Standard
+110 m²,5.5e-05,Basic
+113 m²,9.7e-05,Standard
+1130 feet²,0.0001575,Luxury
+1184 feet²,9.05e-05,Standard
+126 m²,2e-05,Basic
+1270 feet²,0.000165,Luxury
+1292 feet²,6.8e-05,Basic
+1330 feet²,8.8e-05,Standard
+1399 feet²,0.000117,Standard
+1453 feet²,0.000152,Luxury
+15 m²,3.95e-05,Basic
+1528 feet²,6.7e-05,Basic
+161 feet²,0.00011,Standard
+1615 feet²,5.7e-05,Basic
+1711 feet²,0.000116,Standard
+172 feet²,7.4e-05,Standard
+18 m²,4.05e-05,Basic
+1819 feet²,0.000103,Standard
+183 feet²,8.4e-05,Standard
+188 feet²,8e-05,Standard
+194 feet²,0.000106,Standard
+196 feet²,2e-05,Basic
+20 m²,5e-05,Basic
+2000 m²,2.1e-05,Basic
+205 feet²,8.4e-05,Standard
+215 feet²,4.9571428571428566e-05,Basic
+2153 feet²,6.050000000000001e-05,Basic
+224 m²,2.6e-05,Basic
+225 feet²,7.5e-05,Standard
+234 m²,8.2e-05,Standard
+237 feet²,0.0001276666666666667,Standard
+242 feet²,0.000171,Luxury
+25 m²,9e-06,Basic
+258 feet²,9.850000000000001e-05,Standard
+269 feet²,5.766666666666667e-05,Basic
+280 feet²,0.000195,Luxury
+282 feet²,0.000203,Luxury
+30 m²,1.4e-05,Basic
+300 feet²,6.8e-05,Basic
+301 feet²,0.000109,Standard
+320 feet²,8.6e-05,Standard
+322 feet²,0.00013,Standard
+323 feet²,0.00010499999999999999,Standard
+328 feet²,0.00016,Luxury
+332 m²,0.000232,Luxury
+344 feet²,0.000154,Luxury
+35 m²,1.5e-05,Basic
+350 feet²,8.9e-05,Standard
+377 feet²,4.6666666666666665e-05,Basic
+388 feet²,0.000182,Luxury
+398 feet²,0.00017833333333333332,Luxury
+400 feet²,2.2e-05,Basic
+420 feet²,0.000257,Luxury
+431 feet²,4.066666666666667e-05,Basic
+444 feet²,4.8e-05,Basic
+448 feet²,0.00023,Luxury
+46 m²,5e-05,Basic
+474 feet²,0.00014,Luxury
+484 feet²,7.033333333333334e-05,Standard
+50 m²,0.000213,Luxury
+517 feet²,6.5e-05,Basic
+523 feet²,6.2e-05,Basic
+538 feet²,0.0001375,Standard
+5382 feet²,0.000122,Standard
+549 feet²,6.9e-05,Standard
+560 feet²,4.8e-05,Basic
+592 feet²,6.5e-05,Basic
+603 feet²,5e-05,Basic
+624 feet²,2e-05,Basic
+646 feet²,8.649999999999999e-05,Standard
+700 feet²,3.65e-05,Basic
+721 feet²,7.7e-05,Standard
+753 feet²,8.166666666666667e-05,Standard
+775 feet²,5.6e-05,Basic
+786 feet²,9e-05,Standard
+80 m²,0.000124,Standard
+807 feet²,0.000157,Luxury
+8073 feet²,9.5e-05,Standard
+82 m²,9.8e-05,Standard
+861 feet²,6.7e-05,Basic
+883 feet²,0.000163,Luxury
+9149 feet²,5.2e-05,Basic
+923 feet²,7.500000000000001e-05,Standard
+936 feet²,6.3e-05,Basic
+969 feet²,4.5e-05,Basic
+Air conditioning,0.00017242424242424242,Luxury
+Air purifiers,6.73076923076923e-05,Basic
+Alarm clock,7.609999999999999e-05,Standard
+Attached bathroom,0.0001488409090909091,Luxury
+Baby safety gates,8.522222222222222e-05,Standard
+Balcony,9.495e-05,Standard
+Barbecue,9.449999999999999e-05,Standard
+Bathtub or shower,0.00011854385964912281,Standard
+Bidet,0.00013236842105263157,Standard
+Blu-ray player,0.000144,Luxury
+Board games/puzzles,9.144444444444445e-05,Standard
+"Books, DVDs or music for children",8.085714285714285e-05,Standard
+CD player,7.65e-05,Standard
+Cable channels,8.382758620689655e-05,Standard
+Carbon monoxide detector,6.85e-05,Standard
+Carpeted,0.00013202702702702702,Standard
+Child safety socket covers,9.076470588235294e-05,Standard
+City view,0.0001280232558139535,Standard
+Cleaning products,8.794117647058824e-05,Standard
+Clothes rack,0.00011112280701754387,Standard
+Coffee machine,0.0001065,Standard
+Computer,8e-05,Standard
+DVD player,0.00017463636363636363,Luxury
+Detached,5.125e-05,Basic
+Dining table,0.00010174358974358974,Standard
+Drying rack for clothing,5.463636363636363e-05,Basic
+Electric blankets,2.1e-05,Basic
+Electric kettle,0.00016094029850746269,Luxury
+Entire apartment,0.00012083333333333332,Standard
+Entire cabin,0.00018133333333333334,Luxury
+Entire unit located on ground floor,0.00010375,Standard
+Entire unit wheelchair accessible,0.00010590909090909092,Standard
+Entire villa,6.050000000000001e-05,Basic
+Executive lounge access,0.00017784615384615384,Luxury
+Extra long beds (> 6.5 ft),0.0001195,Standard
+Fan,0.00010206896551724138,Standard
+Fireplace,8.25e-05,Standard
+Flat-screen TV,0.0001496086956521739,Luxury
+Fold-up bed,9.375e-05,Standard
+Free WiFi,0.00015047945205479452,Luxury
+Free toiletries,0.00015397297297297296,Luxury
+Game console,0.000144,Luxury
+Garden view,0.00010648275862068965,Standard
+Hairdryer,0.00016847500000000002,Luxury
+Hand sanitizer,0.000143,Luxury
+Hardwood or parquet floors,0.0001085925925925926,Standard
+Hearing accessible,6.825e-05,Standard
+Heating,8.072727272727273e-05,Standard
+High chair,9.125e-05,Standard
+Hot tub,8.8e-05,Standard
+Hypoallergenic,0.00011038888888888889,Standard
+Inner courtyard view,8.549999999999999e-05,Standard
+Interconnecting room(s) available,0.00012008333333333333,Standard
+Iron,0.00012916326530612243,Standard
+Ironing facilities,0.00013801923076923079,Standard
+Landmark view,9.28e-05,Standard
+Laptop,7.066666666666667e-05,Standard
+Laptop safe,0.00016503846153846153,Luxury
+Linens,0.0001008235294117647,Standard
+Minibar,0.00017740909090909092,Luxury
+Mosquito net,6.997674418604651e-05,Standard
+Mountain view,0.000132,Standard
+Outdoor dining area,9.446153846153846e-05,Standard
+Outdoor furniture,0.00010121052631578947,Standard
+Patio,0.00011853846153846154,Standard
+Pay-per-view channels,5.85e-05,Basic
+Pool view,9.822222222222223e-05,Standard
+Pool with a view,0.00011481818181818182,Standard
+Private Bathroom,0.00013161904761904762,Standard
+Private apartment in building,9.76e-05,Standard
+Private entrance,9.791666666666667e-05,Standard
+Private kitchen,0.0001670625,Luxury
+Private kitchenette,8.0375e-05,Standard
+Private pool,5.6e-05,Basic
+Private suite,0.00019607692307692308,Luxury
+Radio,6.421428571428572e-05,Basic
+River view,3.0500000000000003e-05,Basic
+Rooftop pool,0.00011076923076923077,Standard
+Safe,0.0001405357142857143,Luxury
+Satellite channels,0.00015485294117647058,Luxury
+Sauna,0.00020842857142857143,Luxury
+Semi-detached,6.15e-05,Basic
+Shared toilet,9.472727272727272e-05,Standard
+Single-room AC for guest accommodation,0.000122,Standard
+Sitting area,0.0001310333333333333,Standard
+Slippers,0.00015610909090909092,Luxury
+Socket near the bed,0.00012510144927536232,Standard
+Sofa bed,0.000148,Luxury
+Soundproof,0.00014394736842105263,Luxury
+Spa tub,0.0001265,Standard
+Streaming service (like Netflix),0.00011320833333333332,Standard
+Suit press,0.0001426,Luxury
+TV,0.0001521159420289855,Luxury
+Tea/Coffee maker,0.00011819999999999999,Standard
+Telephone,0.00013586000000000002,Standard
+Terrace,5.96875e-05,Basic
+Tile/Marble floor,8.008333333333333e-05,Standard
+Toaster,0.00010142105263157895,Standard
+Toilet paper,0.0001483783783783784,Luxury
+Towels,0.00014848684210526315,Luxury
+Towels/Sheets (extra fee),0.00018866666666666668,Luxury
+Upper floors accessible by elevator,0.00011902631578947368,Standard
+Upper floors accessible by stairs only,0.0001542258064516129,Luxury
+Video,4.9857142857142864e-05,Basic
+Video games,0.000144,Luxury
+View,0.00022499999999999997,Luxury
+Wake-up service,0.00014822727272727272,Luxury
+Wake-up service/Alarm clock,0.0001013125,Standard
+Walk-in closet,0.000135625,Standard
+Wardrobe or closet,0.0001241549295774648,Standard
+Washing machine,0.00011639999999999998,Standard

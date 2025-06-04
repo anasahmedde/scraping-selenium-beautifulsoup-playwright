@@ -1,0 +1,22 @@
+{
+    "openAI": {
+        "apiKey": "API_KEY",
+        "organization": "org-xxxxxxxxxx"
+    },
+    "mongoDB": {
+        "username": "your-mongo-username",
+        "password": "your-mongo-password",
+        "connectionString": "mongodb+srv://<username>:<password>@cluster0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    },
+    "firebase": {
+        "apiKey": "your-firebase-api-key",
+        "authDomain": "your-firebase-auth-domain",
+        "databaseURL": "your-firebase-database-url",
+        "projectId": "your-firebase-project-id"
+    },
+    "otherService": {
+        "apiKey": "service-api-key",
+        "clientSecret": "service-client-secret",
+        "region": "us-west-1"
+    }
+}

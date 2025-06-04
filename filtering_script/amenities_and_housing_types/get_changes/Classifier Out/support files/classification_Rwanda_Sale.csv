@@ -1,0 +1,35 @@
+Amenity,Price,Category
+Balcony,350000.0,Standard
+Eat-in Kitchen,0.0,Basic
+Electrical Generator,0.0,Basic
+Electricity,375000.0,Luxury
+Energy Backup Unit,0.0,Basic
+First owner,375000.0,Luxury
+Furnished,350000.0,Standard
+Garage,350000.0,Standard
+Good reachable traffic,200000.0,Standard
+Gymnasium,0.0,Basic
+Individual Water Meter,0.0,Basic
+Modern,350000.0,Standard
+Near Airport,350000.0,Standard
+Near Church,0.0,Basic
+Near Public Transportation,350000.0,Standard
+New Building,350000.0,Standard
+On Busy Road,400000.0,Luxury
+On Quiet Road,400000.0,Luxury
+Outskirts,0.0,Basic
+Parking                  ,350000.0,Standard
+Permit Parking,0.0,Basic
+Private,400000.0,Luxury
+Residential,350000.0,Standard
+Satellite,0.0,Basic
+Storage Room,0.0,Basic
+Swimming Pool,350000.0,Standard
+TCP/IP,200000.0,Standard
+Terrace/Deck,0.0,Basic
+Towncentre,400000.0,Luxury
+View - Great,375000.0,Luxury
+Washing Facilities (in apartment),0.0,Basic
+Water,375000.0,Luxury
+Water - Tank,350000.0,Standard
+Wood,0.0,Basic

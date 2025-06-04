@@ -1,0 +1,96 @@
+Amenity,Price,Category
+24/7 Security,126600.0,Basic
+Air Conditioning,591540.0,Luxury
+Alarm System,666100.0,Luxury
+Balcony,209438.0,Standard
+Beach,810400.0,Luxury
+Boundary wall,696750.0,Luxury
+Brick,243640.0,Standard
+Building Age less than 1 year,248995.0,Standard
+Building Age less than 10 year,491333.3333333333,Standard
+Building Age less than 3 year,199333.33333333334,Basic
+Building Age less than 5 year,125000.0,Basic
+Bungalow,209747.5,Standard
+Carport,450000.0,Standard
+Ceiling Fan,417620.0,Standard
+City Center,453816.6666666667,Standard
+Concierge Service,314100.0,Standard
+Condominium Apartment,460497.5,Standard
+Eat-in Kitchen,253066.66666666666,Standard
+Electric Heating,105000.0,Basic
+Electricity,0.0,Basic
+Energy Backup Unit,0.0,Basic
+Entrance Hall,445000.0,Standard
+Exterior Views,419600.0,Standard
+First owner,450000.0,Standard
+Furnished,580377.7777777778,Luxury
+Garage,275000.0,Standard
+Garage Detached,0.0,Basic
+Garden,745371.4285714285,Luxury
+Gas,766666.6666666666,Luxury
+High Ceiling,202050.0,Standard
+High Traffic,687000.0,Luxury
+Highrise Condminium,200000.0,Basic
+Hight Speed Internet Access (Optical Fiber),440000.0,Standard
+Individual Water Meter,0.0,Basic
+Kitchen/Dinette,449157.14285714284,Standard
+Lift/Elevator,1066600.0,Luxury
+Maid,312500.0,Standard
+Modern House,275000.0,Standard
+Mountains,373150.0,Standard
+Multilevel House,599500.0,Luxury
+Near Airport,743500.0,Luxury
+Near Beach,496818.0,Standard
+Near Children,324500.0,Standard
+Near Church,393500.0,Standard
+Near Motorway,255000.0,Standard
+Near Public Transportation,179425.7142857143,Basic
+Near Schools,233036.36363636365,Standard
+Near Shops,263933.3333333333,Standard
+Near/On Beach,436830.0,Standard
+Near/On Ocean,481196.0,Standard
+Needs Redevelopment,120000.0,Basic
+Needs Renovation,120000.0,Basic
+Needs to be redeveloped,143800.0,Basic
+New Building,605975.2666666667,Luxury
+Ocean View,613688.8888888889,Luxury
+On Busy Road,260000.0,Standard
+Outdoor kitchen,265000.0,Standard
+Parking                  ,381033.3333333333,Standard
+Partially Furnished,250800.0,Standard
+Pets allowed,330000.0,Standard
+Pool -  Indoor,450000.0,Standard
+Pool - Outdoor,436996.0,Standard
+Private,967250.0,Luxury
+Ready to Sale,0.0,Basic
+Ready to rent,691333.3333333334,Luxury
+Residential,260000.0,Standard
+Restaurant Area,1041333.3333333334,Luxury
+Roof Terrace,614996.6666666666,Luxury
+Sea View,317320.0,Standard
+Security -  System,66600.0,Basic
+Security - Surveillance,468326.6666666667,Standard
+Security Camera,288300.0,Standard
+Shed Detached,800000.0,Luxury
+Solar - Heating,0.0,Basic
+Solar hot water,102990.0,Basic
+Sports Gym,133200.0,Basic
+Staff room,925000.0,Luxury
+Stainless Steel Appliances,741000.0,Luxury
+Swimming Pool,619119.0,Luxury
+Terrace/Deck,508333.3333333333,Standard
+Unfinished,157175.0,Basic
+Unfinished Structure,346750.0,Standard
+Unfurnished,304733.3333333333,Standard
+View - Great,0.0,Basic
+View - Mountain,287500.0,Standard
+View - Ocean,562500.0,Luxury
+View - Open,171000.0,Basic
+Villa,372520.0,Standard
+Walk-In Closet,90000.0,Basic
+Washing Facilities (in apartment),278500.0,Standard
+Water,436665.0,Standard
+Water - Tank,571640.0,Luxury
+Wheelchair Accessible,109600.0,Basic
+With Ownership Right,1064600.0,Luxury
+Wood,144000.0,Basic

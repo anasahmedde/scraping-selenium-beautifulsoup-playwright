@@ -1,0 +1,10 @@
+Amenity,Price,Category
+Alarm,0.001,Basic
+Alternate Power,0.001,Basic
+Borehole,0.002,Standard
+Ensuite,0.0015,Basic
+FItted Kitchen,0.0015,Basic
+Lounges,0.0015,Basic
+Manicured Garden,0.0015,Basic
+Serviced,0.002475,Luxury
+WIFI,0.002,Standard
